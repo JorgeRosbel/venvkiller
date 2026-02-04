@@ -1,6 +1,6 @@
-# EnvKiller
+# VEnvKiller
 
-EnvKiller is a command-line tool designed to help you reclaim disk space by finding and removing unnecessary Python virtual environments. It provides a simple Text User Interface (TUI) to list, search, and delete virtual environments recursively from your current directory.
+VEnvKiller is a command-line tool designed to help you reclaim disk space by finding and removing unnecessary Python virtual environments. It provides a simple Text User Interface (TUI) to list, search, and delete virtual environments recursively from your current directory.
 
 ## Features
 
