@@ -43,6 +43,22 @@ def get_directory_size(path):
                 total_size += os.path.getsize(fp)
     return total_size
 
+
+def is_valid_venv(path):
+    # Check for bin/python on Linux/Mac or Scripts/python.exe on Windows
+    bin_path = os.path.join(path, "bin")
+    if not os.path.exists(bin_path):
+        return False
+    
+    # Check for python executable
+    has_python = False
+    if os.path.exists(bin_path):
+        for f in os.listdir(bin_path):
+            if f.startswith("python"):
+                has_python = True
+                break
+    return has_python
+
 def get_venv():
     venv_list = []
 
@@ -51,7 +67,9 @@ def get_venv():
             if dir == ".venv" or dir == "venv" or dir == "env":
                 path = os.path.join(root, dir)
                 abs_path = os.path.realpath(path)
-                venv_list.append({"path": abs_path, "status": "AVAILABLE", "size": get_size(get_directory_size(abs_path))})
+                
+                if is_valid_venv(abs_path):
+                    venv_list.append({"path": abs_path, "status": "AVAILABLE", "size": get_size(get_directory_size(abs_path))})
     return venv_list
                
 
