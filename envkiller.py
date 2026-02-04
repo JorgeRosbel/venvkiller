@@ -26,12 +26,22 @@ def get_size(size):
     if size < kb:
         return f"{size} B", size
     elif size < mb:
-        return f"{size / kb} KB", size
+        return f"{(size / kb):.2f} KB", size
     elif size < gb:
-        return f"{size / mb} MB", size
+        return f"{(size / mb):.2f} MB", size
     else:
-        return f"{size / gb} GB", size
+        return f"{(size / gb):.2f} GB", size
 
+
+def get_directory_size(path):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            # skip if it is symbolic link
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+    return total_size
 
 def get_venv():
     venv_list = []
@@ -41,7 +51,7 @@ def get_venv():
             if dir == ".venv" or dir == "venv" or dir == "env":
                 path = os.path.join(root, dir)
                 abs_path = os.path.realpath(path)
-                venv_list.append({"path": abs_path, "status": "AVAILABLE", "size": get_size(os.path.getsize(abs_path))})
+                venv_list.append({"path": abs_path, "status": "AVAILABLE", "size": get_size(get_directory_size(abs_path))})
     return venv_list
                
 
