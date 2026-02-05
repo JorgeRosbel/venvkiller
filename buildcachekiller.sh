@@ -14,7 +14,7 @@ echo -e "${CYAN}                               BUILD CACHE KILLER v0.0.1        
 echo -e "${CYAN}=============================================================================================${NC}"
 echo  ""
 
-mapfile -t venvs < <(find . -type d \( -name "build" -o -name "out" -o -name "dist" -o -name ".astro" -o -name ".next" -o -name ".trubo" -o -name ".svelte-kit" \) -print)
+mapfile -t venvs < <(find . -type d \( -name "node_modules" -o -name ".windsurf-server" -o -name ".local" -o -name ".npm" -o -name ".cache" -o -name ".npm-global" -o -name ".nvm" \) -prune -o -type d \( -name "build" -o -name "out" -o -name "dist" -o -name ".astro" -o -name ".next" -o -name ".trubo" -o -name ".svelte-kit" \) -print)
 states=()
 sizes=()
 
