@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -o pipefail
 
 rot13() {
     if [ "$2" == "-d" ]; then
